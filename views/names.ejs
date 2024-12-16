@@ -37,11 +37,29 @@
             cursor: pointer;
             margin: 5px;
             width: 100%;
+            transition: background-color 0.3s ease;
         }
         .card button:hover {
             background: #357abd;
         }
-  
+        .card button a {
+            color: white;
+            text-decoration: none;
+        }
+        .card button.delete-btn {
+            background: #dc3545;
+        }
+        .card button.delete-btn:hover {
+            background: #c82333;
+        }
+        .card input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
@@ -54,7 +72,6 @@
                 <img src="https://img.pokemondb.net/artwork/large/<%=names[i].name.toLowerCase() %>.jpg" class="card-img-top"  alt="<%= names[i].name %>"style="height: 200px; object-fit: contain; padding: 1rem;">
                 <button type="submit">
                     <a target="_blank" href="https://www.pokemon.com/us/pokedex/<%=names[i].name%>">
-
                         <%=names[i].name %>
                     </a>
                 </button>
@@ -64,7 +81,8 @@
                 </form>
                 <form action="/nameDelete" method="post"  >
                     <input type="hidden" name="name" value="<%=names[i].name%>">
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+                    <input type="password" name="password" placeholder="Enter password to confirm" required>
+                    <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
                 </form>
             </div>
         <% } %>

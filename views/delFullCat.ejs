@@ -4,44 +4,91 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Delete Category</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
         .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .card {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 25px;
             text-align: center;
             transition: transform 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
         }
-        .card i {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #4a90e2;
-        }
         .card button {
             background: #4a90e2;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 6px;
             cursor: pointer;
-            margin: 5px;
+            margin: 10px 0;
             width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s ease;
         }
         .card button:hover {
             background: #357abd;
         }
-  
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input[type="password"]:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+        form button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        form button:hover {
+            background: #c82333;
+        }
     </style>
 </head>
 
@@ -52,14 +99,14 @@
                 <button type="submit">
                     <%=names[i].name %>
                 </button>
+                <form action="/catDelete" method="post">
+                    <input type="hidden" name="cat" value="<%=cat%>">
+                    <h1>Are you sure you want to delete this?</h1>
+                    <input type="password" name="password" placeholder="Enter password to confirm" required>
+                    <button type="submit">Delete</button>
+                </form>
             </div>
-            <form action="/catDelete" method="post">
-                <input type="hidden" name="cat" value="<%=cat%>">
-                <h1>are you sure to delete this</h1>
-                <button type="submit">Delete</button>
-            </form>
         <% } %>
     </div>
 </body>
-
 </html>

@@ -18,13 +18,11 @@ exports.catSearchGet= async (req,res)=>{
 
 // ! edit
 exports.catEditPost= async (req,res)=>{
-     console.log("post",req.body.cat,req.body.catid);
      await db.editCat(req.body.cat,req.body.catid);
 
      res.redirect('/');
 }
 exports.catEditGet= async (req,res)=>{
-     console.log("category get :"+(req.query.catid));
      
      res.render('catForm',{catid:req.query.catid});    
 }
@@ -45,7 +43,12 @@ exports.nameEditGet= async (req,res)=>{
 
 
 exports.catDeletePost= async (req,res)=>{
-     await db.deleteFullCat(req.body.cat);
+     if(req.body.password===process.env.PASS){
+          await db.deleteFullCat(req.body.cat);
+     }
+     else{
+          console.log('Wrong Password Entered');
+     }
      res.redirect('/');
 }
 exports.catDeleteGet= async (req,res)=>{
@@ -54,7 +57,12 @@ exports.catDeleteGet= async (req,res)=>{
 
 
 exports.nameDeletePost= async (req,res)=>{
-     await db.deleteName(req.body.name);
+     if(req.body.password===process.env.PASS){
+          await db.deleteName(req.body.name);
+     }
+     else{
+          console.log('Wrong Password Entered');
+     }
      res.redirect('/');
 }
 
