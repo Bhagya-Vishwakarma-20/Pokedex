@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Types</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+        .main-title {
+            text-align: center;
+            color: #ffffff;
+            padding: 30px 0;
+            background-color: #2d2d2d;
+            margin: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #2d2d2d;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .card button {
+            background: #3a3a3a;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            width: 100%;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .card button:hover {
+            background: #4a4a4a;
+        }
+        .edit-button {
+            background: #404040 !important;
+        }
+        .edit-button:hover {
+            background: #505050 !important;
+        }
+        .create-form {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .create-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            font-size: 14px;
+            background: #3a3a3a;
+            color: #ffffff;
+        }
+        .create-form input::placeholder {
+            color: #888888;
+        }
+        .create-form button {
+            background: #3a3a3a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .create-form button:hover {
+            background: #4a4a4a;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="main-title">Types </h1>
+    <div class="card-container">
+        <% for (let i=0; i < cats.length; i++) { %>
+            <div class="card">
+                <img src="/images/types/<%= cats[i].cat.toLowerCase() %>.png" alt="<%= cats[i].cat %> type" onclick="this.parentElement.querySelector('form:first-of-type button').click()">
+                <form action="/cat" method="get">
+                    <input type="hidden" name="catid" value="<%=cats[i].cat%>">
+                    <button type="submit"><%=cats[i].cat %></button>
+                </form>
+                <form action="/catEdit" method="get">
+                    <input type="hidden" name="catid" value="<%=cats[i].id%>">
+                    <button type="submit" class="edit-button">Edit</button>
+                </form>
+                <form action="/catDelete" method="get">
+                    <input type="hidden" name="cat" value="<%=cats[i].cat%>">   
+                    <button type="submit" class="edit-button">Delete</button>
+                </form>
+            </div>
+        <% } %>
+        <div class="create-form">
+            <form action="/createCat" method="post">
+                <input type="text" name="cat" id="cat" placeholder="Create a new type">
+                <button type="submit">Create Type</button>
+            </form>
+        </div>
+
+        <div class="create-form">
+            <form action="/createName" method="post">
+                <input type="text" name="name" id="name" placeholder="Create a new pokemon">
+                <input type="text" name="cat" id="cat" placeholder="Enter its Type">
+                <button type="submit">Create Pokemon</button>
+            </form>
+        </div>
+    </div>
+</body></html>
+

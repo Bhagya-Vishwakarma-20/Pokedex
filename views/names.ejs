@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card i {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #4a90e2;
+        }
+        .card button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            width: 100%;
+        }
+        .card button:hover {
+            background: #357abd;
+        }
+  
+    </style>
+</head>
+
+<body>
+    
+    <div class="card-container">
+
+        <% for (let i=0; i < names.length; i++) { %>
+            <div class="card">
+                <img src="https://img.pokemondb.net/artwork/large/<%=names[i].name.toLowerCase() %>.jpg" class="card-img-top"  alt="<%= names[i].name %>"style="height: 200px; object-fit: contain; padding: 1rem;">
+                <button type="submit">
+                    <a target="_blank" href="https://www.pokemon.com/us/pokedex/<%=names[i].name%>">
+
+                        <%=names[i].name %>
+                    </a>
+                </button>
+                <form action="/nameEdit" method="get">
+                    <input type="hidden" name="nameid" value="<%=names[i].id%>">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/nameDelete" method="post"  >
+                    <input type="hidden" name="name" value="<%=names[i].name%>">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+                </form>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
