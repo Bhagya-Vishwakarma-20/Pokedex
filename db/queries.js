@@ -48,10 +48,7 @@ exports.createCat=async (cat)=>{
 exports.createName=async(name,cat)=>{
     pool.query('INSERT INTO names (name) VALUES ($1)',[name]);
     const {rows} =  await pool.query('SELECT MAX(id) FROM names');
-    console.log(rows[0]);
-    
     const nameid=rows[0].max;
-    console.log(nameid);
     pool.query('INSERT INTO cate (name_id,cat) VALUES ($1,$2) ',[nameid,cat]);
 }
 
